@@ -1,0 +1,47 @@
+﻿@page
+@model GuestBookRazorPages.Pages.Messages.IndexModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@if (PageContext.HttpContext.Session.GetString("LastName") != null
+ && PageContext.HttpContext.Session.GetString("FirstName") != null)
+{
+    <p>
+        <a asp-page="/Messages/Create">Create New Message</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mesage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Login)
+                </td>
+                <td>
+                    <a asp-page="/Messages/Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

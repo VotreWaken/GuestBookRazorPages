@@ -1,0 +1,36 @@
+﻿@page
+@model GuestBookRazorPages.Pages.Messages.IndexUserMessagesModel
+@{
+    ViewData["Title"] = "GetUserMessages";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mesage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Login)
+                </td>
+                <td>
+                    <a asp-page="/Messages/Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-page="/Messages/Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-page="/Messages/Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
